@@ -108,3 +108,5 @@ package-lock.json
 
 #.rest
 *.rest
+
+prueba.js
