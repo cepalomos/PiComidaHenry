@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
   sequelize.define('recipe', {
     id:{
       type:DataTypes.UUID,
-      defaulValue: DataTypes.UUIDV4,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
     name: {
@@ -15,6 +15,7 @@ module.exports = (sequelize) => {
     },
     summary:{
       type: DataTypes.TEXT,
+      allowNull:false
     },
     score:{
       type: DataTypes.INTEGER

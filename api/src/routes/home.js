@@ -6,7 +6,7 @@ const dieta = require('../utils/extracDiets.js');
 const {API_KEY} = process.env;
 
 router.get("/",(req,res)=>{
-    dieta(URL_PRINCIPAL.replace("{API_KEY}", API_KEY)).then(()=>console.log("exito")).catch(error=>console.error(error));
+    dieta(URL_PRINCIPAL.replace("{API_KEY}", API_KEY)).then(()=>res.send("exito")).catch(error=>console.error(error));
 })
 
 
