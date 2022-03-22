@@ -4,8 +4,24 @@ const { Router } = require("express");
 const { Recipe, Diet } = require("../db.js");
 const router = Router();
 const { API_KEY } = process.env;
-const { URL_PRINCIPAL } = require("../utils/constantes.js");
+const { URL_PRINCIPAL, URL_DETALLE } = require("../utils/constantes.js");
 const formateo = require("../utils/formateo.js");
+const { Op } = require("sequelize");
+const searchId = require("../utils/searchId.js");
+const searchBd = require('../utils/searchIdBd.js');
+
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  if (id.length < 7) {
+    searchId(URL_DETALLE.replace("{API_KEY}", API_KEY).replace("{id}", id))
+      .then((receta) => res.send(receta))
+      .catch((error) =>
+        res.status(500).send("No existe la receta en nuestra base de datos")
+      );
+  }else{
+    searchBd(id).then(receta=>res.send(receta)).catch(error=>res.status(500).send(new Error(error)));
+  }
+});
 
 router
   .route("/")
@@ -18,7 +34,20 @@ router
             receta.name.toLowerCase().includes(name.toLowerCase())
           );
         })
-        .then((data) => res.send(data));
+        .then((data) =>
+          Recipe.findAll({
+            where: {
+              name: {
+                [Op.like]: name,
+              },
+            },
+            include: {
+              model: Diet,
+              attributes: ["name"],
+            },
+          }).then((dabaBd) => dabaBd.concat(data))
+        )
+        .then((result) => res.send(result));
     } else {
       formateo(URL_PRINCIPAL.replace("{API_KEY}", API_KEY))
         .then(async (datosurl) => {
