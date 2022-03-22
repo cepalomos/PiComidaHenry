@@ -10,19 +10,32 @@ const formateo = require("../utils/formateo.js");
 router
   .route("/")
   .get((req, res) => {
-    formateo(URL_PRINCIPAL.replace("{API_KEY}", API_KEY))
-      .then(async (datosurl) => {
-        let recetas = await Recipe.findAll({
-          include: {
-            model: Diet,
-            attributes: ["name"],
-          },
-        });
-        return datosurl.concat(recetas);
-      })
-      .then((datos) => res.send(datos))
+    const { name } = req.query;
+    if (name) {
+      formateo(URL_PRINCIPAL.replace("{API_KEY}", API_KEY))
+        .then((recetas) => {
+          return recetas.filter((receta) =>
+            receta.name.toLowerCase().includes(name.toLowerCase())
+          );
+        })
+        .then((data) => res.send(data));
+    } else {
+      formateo(URL_PRINCIPAL.replace("{API_KEY}", API_KEY))
+        .then(async (datosurl) => {
+          let recetas = await Recipe.findAll({
+            include: {
+              model: Diet,
+              attributes: ["name"],
+            },
+          });
+          return datosurl.concat(recetas);
+        })
+        .then((datos) => res.send(datos))
 
-      .catch((error) => res.status(400).send(JSON.stringify(new Error(error))));
+        .catch((error) =>
+          res.status(400).send(JSON.stringify(new Error(error)))
+        );
+    }
   })
   .post((req, res) => {
     const { name, summary, score, healthScore, steps, diets } = req.body;
