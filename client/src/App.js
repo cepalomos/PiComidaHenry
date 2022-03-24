@@ -1,9 +1,10 @@
 import './App.css';
+import Bienvenida from './componentes/Bienvenido';
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Food</h1>
+     <Bienvenida/>
     </div>
   );
 }
