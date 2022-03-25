@@ -9,6 +9,7 @@ module.exports = (url_api) => {
           return {
             id: receta.id,
             name: receta.title,
+            image: receta.image,
             summary: receta.summary,
             score: receta.spoonacularScore,
             healthScore: receta.healthScore,

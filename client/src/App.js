@@ -1,11 +1,15 @@
-import './App.css';
-import Bienvenida from './componentes/Bienvenido';
+import { Provider } from "react-redux";
+import "./App.css";
+import Tarjetas from "./componentes/Tarjetas";
+import store from "./redux/store";
 
 function App() {
   return (
-    <div className="App">
-     <Bienvenida/>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Tarjetas />
+      </div>
+    </Provider>
   );
 }
 

@@ -110,3 +110,7 @@ package-lock.json
 *.rest
 
 prueba.js
+
+*.jepg
+*.jpg
+*.png

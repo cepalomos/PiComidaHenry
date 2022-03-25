@@ -12,15 +12,15 @@ export const recetasRequest = () =>{
 
 export const recetasSuccess = (recetas) =>{
   return {
-    type:RECETAS_SUCCESS,
+    type: RECETAS_SUCCESS,
     payload: recetas
   }
 };
 
 export const recetasFailure = (error) =>{
   return {
-    type:RECETAS_FAILURE,
-    payload: error
+    type: RECETAS_FAILURE,
+    payload: 'falla en el servidor'
   }
 };
 
