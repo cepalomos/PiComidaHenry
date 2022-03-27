@@ -19,6 +19,6 @@ export  const useAxios = (url) => {
       }
     };
     getData(url);
-  }, [url]);
+  }, []);
   return { data, error, loading };
 };

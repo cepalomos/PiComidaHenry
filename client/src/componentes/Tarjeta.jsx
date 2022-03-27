@@ -8,7 +8,7 @@ export default function Tarjeta(props) {
         </div>
         <div>
             <h4>{props.name}</h4>
-            <p>{props.dietas}</p>
+            <p>{props.dietas.join(", ")}</p>
         </div>
     </div>
   )

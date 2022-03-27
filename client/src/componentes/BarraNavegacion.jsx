@@ -10,7 +10,10 @@ export default function BarraNavegacion() {
   const dietas = useAxios(URL_TYPE);
   return (
     <div>
-      {dietas.data.length >=1 && <Dietas diets={[dietas.data]}/>}
+      <OrderAlfabeticamente/>
+      {dietas.data.length >=1 && <Dietas diets={dietas.data}/>}
+      <Puntuacion/>
+      <Busqueda/>
     </div>
   );
 }

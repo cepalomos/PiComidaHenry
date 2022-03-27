@@ -6,11 +6,12 @@ export default function Dietas({ diets }) {
     <div>
       <label>
         Escriba en la caja de texto la dieta:
-        <input list="dietas" name="myBrowser" />
+        <input list="dietas" name="dieta"/>
       </label>
       <datalist id="dietas">
         {options.length >=1 && options}
       </datalist>
+      <button>Filtrar</button>
     </div>
   );
 }
